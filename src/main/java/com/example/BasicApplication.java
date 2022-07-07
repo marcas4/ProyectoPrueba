@@ -45,13 +45,7 @@ public class BasicApplication {
             }while(option != 5);
             
 		SpringApplication.run(BasicApplication.class, args);
-             Connection conexion = new Connection();
-        
-        try(java.sql.Connection cnx = conexion.get_connection()){
             
-        }catch(Exception e){
-            System.out.print(e);
-        }
     }
                
 }

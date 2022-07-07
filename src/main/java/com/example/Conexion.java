@@ -11,13 +11,13 @@ import java.sql.SQLException;
  *
  * @author Marcia Castro
  */
-public class Connection {
+public class Conexion {
     
-     public java.sql.Connection get_connection(){
-        java.sql.Connection conection = null;
+     public Conexion get_connection(){
+        Conexion conection = null;
         
         try{
-            conection = DriverManager.getConnection("jdbc:mysql://localhost/mensajes_app","root","");
+            conection = (Conexion) DriverManager.getConnection("jdbc:mysql://localhost/mensajes_app","root","");
            /* if(conection != null){
                 System.out.println("Conexión exitosa");
             }*/

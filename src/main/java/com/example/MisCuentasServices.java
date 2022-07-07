@@ -4,6 +4,8 @@
  */
 package com.example;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Marcia Castro
@@ -12,6 +14,11 @@ public class MisCuentasServices {
     
      public static void listarBancos(){
          
+         Scanner sc = new Scanner(System.in);
+        System.out.println("Escribe el id de tu usuario");
+        int idUsuario = Integer.valueOf(sc.nextLine());
+        MisCuentas cuenta = new MisCuentas(idUsuario);
+        MisCuentasDAO.leerBancosDB(cuenta);
      }
      
      public static void listardeudas(){
