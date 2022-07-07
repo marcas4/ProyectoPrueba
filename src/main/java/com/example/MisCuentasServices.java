@@ -10,6 +10,18 @@ package com.example;
  */
 public class MisCuentasServices {
     
+     public static void listarBancos(int usuario){
+         
+     }
+     
+     public static void listardeudas(int usuario, int banco){
+         
+     }
+     
+     public static void pagarCuota(int usuario, int banco, int deuda, int numCuotas){
+         
+     }
+     
      
     
 }

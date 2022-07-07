@@ -10,4 +10,23 @@ package com.example;
  */
 public class MisCuentasDAO {
     
+    public static void leerBancosDB(int usuario){
+        
+    }
+    
+    public static void leerDeudasDB(int usuario, int banco){
+        
+    }
+    
+    public static void pagarDeudaDB(int usuario, int deuda){
+        
+    }
+    
+    public static void actualizarDeudasDB(int usuario){
+        
+    }
+    
+    public static void pagarCuotas(int usuario, int dueuda, int numCuotas){
+        
+    }
 }
