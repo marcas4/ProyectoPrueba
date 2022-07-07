@@ -10,4 +10,55 @@ package com.example;
  */
 public class MisCuentas {
     
+    private String usuario;
+    private String banco;
+    private double deuda;
+    private double saldo;
+
+    public MisCuentas(String usuario, String banco) {
+        this.usuario = usuario;
+        this.banco = banco;
+    }
+
+    public MisCuentas(String usuario, String banco, double deuda) {
+        this.usuario = usuario;
+        this.banco = banco;
+        this.deuda = deuda;
+    }
+    
+    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getBanco() {
+        return banco;
+    }
+
+    public void setBanco(String banco) {
+        this.banco = banco;
+    }
+
+    public double getDeuda() {
+        return deuda;
+    }
+
+    public void setDeuda(double deuda) {
+        this.deuda = deuda;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+    
+    
 }
