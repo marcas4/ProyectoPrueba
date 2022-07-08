@@ -9,16 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BasicApplication {
 
 	public static void main(String[] args) {
-            
-            
-        /*     Conexion conexion = new Conexion();
-                        try(Connection cnx = (Connection) conexion.get_connection()) {
-                                                        
-                        } catch (Exception e) {
-                            System.out.println(e); 
-                                    
-                        }*/
-            
+        //Se pregunta al usuario su id
         Scanner sc = new Scanner(System.in);
         Scanner scid = new Scanner(System.in);
         System.out.println("Escribe el id de tu usuario");
@@ -26,9 +17,9 @@ public class BasicApplication {
         MisCuentas misCuentas = new MisCuentas(idUsuario);
             
             int option = 0;
-            
+            //Se lista el menú
             do{
-                System.out.println("************************");
+                System.out.println("***************************");
                 System.out.println("  Aplicación de Mis Cuentas  ");
                 System.out.println("1. Ver el listado de mis bancos");
                 System.out.println("2. Ver mis deudas ");

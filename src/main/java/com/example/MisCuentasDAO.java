@@ -14,7 +14,8 @@ import java.sql.SQLException;
  * @author Marcia Castro
  */
 public class MisCuentasDAO {
-    
+    /*Se conecta directamente con la base de datos para obtener la lista de bancos donde la
+      usuaria o usuario tiene deudas*/
     public static void leerBancosDB(MisCuentas misCuentas){
         Conexion dbConnect = new Conexion();
         
@@ -40,6 +41,8 @@ public class MisCuentasDAO {
             
     }
     
+    /*Se conecta directamente con la base de datos para obtener la lista de deudas que tiene la
+      usuaria o usuario en determinado banco*/
     public static void verDeudasDB(MisCuentas misCuentas){
         Conexion dbConnect = new Conexion();
         
@@ -47,8 +50,6 @@ public class MisCuentasDAO {
         ResultSet rs=null;
         
         try(Connection conexion = (Connection) dbConnect.get_connection()) {
-               /* String query="SELECT * FROM deuda_por_usuario WHERE id_banco = ? AND id_usuario = ?";
-               */
                String query="SELECT * FROM bancos INNER JOIN (deuda_por_usuario INNER JOIN deudas ON deuda_por_usuario.id_deuda = deudas.id_deuda)" +
                              " ON bancos.id_banco = deuda_por_usuario.id_banco" +
                              " WHERE deuda_por_usuario.id_banco = ? AND deuda_por_usuario.id_usuario = ?";
@@ -73,7 +74,8 @@ public class MisCuentasDAO {
                 System.out.println(e);
             }
     }
-       
+     /*Se conecta directamente con la base de datos para pagar las cuotas que desee  la
+      usuaria o usuario en la deuda elegida por el o ella*/  
     public static void pagarCuotas(MisCuentas misCuentas){
        Conexion db_connect = new Conexion();
         
