@@ -4,6 +4,7 @@
  */
 package com.example;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -13,11 +14,11 @@ import java.sql.SQLException;
  */
 public class Conexion {
     
-     public Conexion get_connection(){
-        Conexion conection = null;
+     public Connection get_connection(){
+        Connection conection = null;
         
         try{
-            conection = (Conexion) DriverManager.getConnection("jdbc:mysql://localhost/mensajes_app","root","");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/proyectoprueba","root","");
            /* if(conection != null){
                 System.out.println("Conexión exitosa");
             }*/

@@ -1,5 +1,6 @@
 package com.example;
 
+import java.sql.Connection;
 import java.util.Scanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +10,16 @@ public class BasicApplication {
 
 	public static void main(String[] args) {
             
-            Scanner sc = new Scanner(System.in);
+            
+        /*     Conexion conexion = new Conexion();
+                        try(Connection cnx = (Connection) conexion.get_connection()) {
+                                                        
+                        } catch (Exception e) {
+                            System.out.println(e); 
+                                    
+                        }*/
+            
+        Scanner sc = new Scanner(System.in);
             
             int option = 0;
             
@@ -28,15 +38,16 @@ public class BasicApplication {
                 switch(option){
                     case 1:
                         MisCuentasServices.listarBancos();
+                                     
                         break;
                     case 2:
                         MisCuentasServices.listardeudas();
                         break;
                     case 3:
-                        MisCuentasServices.estadoDeuda();
+                       MisCuentasServices.estadoDeuda();
                         break;
                     case 4:
-                        MisCuentasServices.pagarCuota();
+                       MisCuentasServices.pagarCuota();
                         break;
                     default:
                         break;
@@ -44,10 +55,11 @@ public class BasicApplication {
                 
             }while(option != 5);
             
+                       
 		SpringApplication.run(BasicApplication.class, args);
             
     }
-               
+             
 }
 
 

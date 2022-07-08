@@ -18,39 +18,52 @@ public class MisCuentasDAO {
     public static void leerBancosDB(MisCuentas misCuentas){
         Conexion dbConnect = new Conexion();
         
+        PreparedStatement  ps=null;
+        ResultSet rs=null;
+        
         try(Connection conexion = (Connection) dbConnect.get_connection()) {
-            PreparedStatement  ps=null;
-            PreparedStatement  ps1=null;
-            ResultSet rs=null;
-            ResultSet rs1=null;
-            
-            try{
-                String query="SELECT id_banco FROM deuda_por_usuario WHERE id_usuario = ?;";
+               
+            String query="SELECT * FROM deuda_por_usuario INNER JOIN bancos ON deuda_por_usuario.id_banco = bancos.id_banco WHERE id_usuario = ?";
                 
                 ps=conexion.prepareStatement(query);
                 ps.setString(1, String.valueOf(misCuentas.getId_usuario()));
                 rs=ps.executeQuery();
                 
                 while (rs.next()) {
-                    String query1="SELECT banco FROM bancos WHERE id_bancos = ?;";
-                
-                    ps1=conexion.prepareStatement(query1);
-                    ps1.setString(1, String.valueOf(misCuentas.getBanco()));
-                    rs1=ps1.executeQuery();
-                    System.out.println("Banco: "+rs.getInt("banco"));
+                    System.out.println("Banco: "+rs.getString("banco")+"  ID del Banco: "+rs.getInt("id_banco"));
+                                
                 }
-               
             }catch(SQLException e){
                 System.out.println("no se pudieron recuperar los bancos");
                 System.out.println(e);
             }
             
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
+       
     }
     
-    public static void leerDeudasDB(int usuario, int banco){
+    public static void verDeudasDB(MisCuentas misCuentas){
+        Conexion dbConnect = new Conexion();
+        
+        PreparedStatement  ps=null;
+        ResultSet rs=null;
+        
+        try(Connection conexion = (Connection) dbConnect.get_connection()) {
+               /* String query="SELECT * FROM deuda_por_usuario WHERE id_banco = ? AND id_usuario = ?";
+                
+                ps=conexion.prepareStatement(query);
+                ps.setString(1, String.valueOf(misCuentas.getIdBanco()));
+                ps.setString(2, String.valueOf(misCuentas.getIdBanco()));
+                rs=ps.executeQuery();
+                
+                while (rs.next()) {
+                    System.out.println("Banco: "+misCuentas.getBanco()+"  deuda "+rs.getInt("deuda"));
+  
+                }*/
+               
+            }catch(SQLException e){
+                System.out.println("no se pudieron recuperar las deudas");
+                System.out.println(e);
+            }
         
     }
     
