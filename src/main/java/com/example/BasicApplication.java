@@ -32,9 +32,8 @@ public class BasicApplication {
                 System.out.println("  Aplicación de Mis Cuentas  ");
                 System.out.println("1. Ver el listado de mis bancos");
                 System.out.println("2. Ver mis deudas ");
-                System.out.println("3. Ver estado de mi deuda ");
-                System.out.println("4. Pagar una deuda");
-                System.out.println("5. Salir");
+                System.out.println("3. Pagar una deuda");
+                System.out.println("4. Salir");
                 
                 //Se lee la opción que se de en pantalla
                 option = sc.nextInt();
@@ -42,22 +41,18 @@ public class BasicApplication {
                 switch(option){
                     case 1:
                         MisCuentasServices.listarBancos(misCuentas);
-                                     
                         break;
                     case 2:
                         MisCuentasServices.listardeudas(misCuentas);
                         break;
                     case 3:
-                       MisCuentasServices.estadoDeuda();
-                        break;
-                    case 4:
-                       MisCuentasServices.pagarCuota();
+                       MisCuentasServices.pagarCuota(misCuentas);
                         break;
                     default:
                         break;
                 }
                 
-            }while(option != 5);
+            }while(option != 4);
             
                        
 		SpringApplication.run(BasicApplication.class, args);

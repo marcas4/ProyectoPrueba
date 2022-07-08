@@ -38,7 +38,6 @@ public class MisCuentasDAO {
                 System.out.println(e);
             }
             
-       
     }
     
     public static void verDeudasDB(MisCuentas misCuentas){
@@ -60,6 +59,7 @@ public class MisCuentasDAO {
                 rs=ps.executeQuery();
                 while (rs.next()) {
                     System.out.println("id Banco: "+misCuentas.getIdBanco());
+                    System.out.println("ID de la Deuda: "+rs.getInt("id_deuda"));
                     System.out.println("Deuda: "+rs.getDouble("deuda"));
                     System.out.println("Valor cuota: "+rs.getDouble("valor_cuota"));
                     System.out.println("Cuotas totales: "+rs.getInt("cuotas_totales"));
@@ -72,27 +72,65 @@ public class MisCuentasDAO {
                 System.out.println("no se pudieron recuperar las deudas");
                 System.out.println(e);
             }
-        
     }
-    
-    public static void pagarDeudaDB(int usuario, int deuda){
-        
-    }
-    
-    public static void actualizarDeudasDB(int usuario){
-        
-    }
-    
+       
     public static void pagarCuotas(MisCuentas misCuentas){
-        Conexion dbConnect = new Conexion();
+       Conexion db_connect = new Conexion();
         
-        try(Connection conexion = (Connection) dbConnect.get_connection()) {
+       try(Connection conexion = db_connect.get_connection())  {
             PreparedStatement  ps=null;
             ResultSet rs=null;
             
-           
-            
-        } catch (Exception e) {
+             String query="SELECT * FROM deudas WHERE id_deuda= ?";
+                
+                ps=conexion.prepareStatement(query);
+                ps.setString(1, String.valueOf(misCuentas.getIdDeuda()));
+                rs=ps.executeQuery();
+              /*  while (rs.next()) {
+                    System.out.println("Deuda: "+rs.getDouble("deuda"));
+               
+                }*/
+              rs.next();
+              double valorCuota = rs.getDouble("valor_cuota");
+              int cuotasPagadas= rs.getInt("cuotas_pagadas");
+              int cuotasTotales = rs.getInt("cuotas_totales");
+              double saldo = rs.getDouble("saldo");
+              int cuotasFaltantes = cuotasTotales - cuotasPagadas;
+              if(cuotasFaltantes < misCuentas.getNumCuotas()){
+                   System.out.println("El número de cuotas que desea pagar excede el número de cuotas faltantes");
+                   System.out.println("Solo puede pagar: "+cuotasFaltantes);
+              }else{
+                  double pago = misCuentas.getNumCuotas() * valorCuota;
+                  int cuotasPagadasDB = cuotasPagadas + misCuentas.getNumCuotas();
+                  double saldoDB = saldo - pago;
+                  
+                  PreparedStatement  ps1=null;
+                  
+                  String query1="UPDATE deudas SET saldo = ?, cuotas_pagadas = ? WHERE id_deuda = ?";
+                               
+                   ps1=conexion.prepareStatement(query1);
+                   ps1.setString(1, String.valueOf(saldoDB));
+                   ps1.setString(2, String.valueOf(cuotasPagadasDB));
+                   ps1.setString(3, String.valueOf(misCuentas.getIdDeuda()));
+                   ps1.executeUpdate();
+                   
+                   System.out.println("Ha pagado usted "+misCuentas.getNumCuotas()+" cuota por un valor total de: "+pago);
+                   System.out.println("Se ha actualizado su deuda: ");
+                   System.out.println("ID de la Deuda: "+rs.getInt("id_deuda"));
+                   System.out.println("Deuda: "+rs.getDouble("deuda"));
+                   System.out.println("Valor cuota: "+rs.getDouble("valor_cuota"));
+                   System.out.println("Cuotas totales: "+rs.getInt("cuotas_totales"));
+                   System.out.println("Cuotas pagadas: "+cuotasPagadasDB);
+                   System.out.println("Saldo que debe: "+saldoDB);
+                   
+                   if(saldoDB == 0){
+                       System.out.println("Su deuda ha sido cancelada totalmente");
+                   }
+                  
+              }
+                  
+        }catch(SQLException e){
+            System.out.println(e);
         }
     }
 }

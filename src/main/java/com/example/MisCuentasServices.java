@@ -18,6 +18,7 @@ public class MisCuentasServices {
      
      public static void listardeudas(MisCuentas misCuentas){
         Scanner sc = new Scanner(System.in);
+        Scanner sc1 = new Scanner(System.in);
           
         System.out.println("Escribe el id del banco que quieres mirar");
         int idBanco = Integer.valueOf(sc.nextLine());
@@ -25,13 +26,25 @@ public class MisCuentasServices {
         MisCuentasDAO.verDeudasDB(misCuentas);
      }
      
-     public static void pagarCuota(){
+     public static void pagarCuota(MisCuentas misCuentas){
+         Scanner sc = new Scanner(System.in);
+          
+        System.out.println("Escribe el id de la deuda que quieres pagar ");
+         int idDeuda = Integer.valueOf(sc.nextLine());
+         misCuentas.setIdDeuda(idDeuda);
+        System.out.println("Escribe cuantas cuotas vas a pagar ");
+        int cuotas = Integer.valueOf(sc.nextLine());
+        misCuentas.setNumCuotas(cuotas);
+        
+        System.out.println("Por favor confirma que vas a pagar ahora (y/n): ");
+        String confirmar = sc.nextLine();
+        
+        if(confirmar.equals("y")){
+            MisCuentasDAO.pagarCuotas(misCuentas);
+        }else{
+            System.out.println("Muchas gracias por utilizar nuestros servicios, cuando esté listo o lista para pagar tu deuda vuelve a este menú");
+        }
          
      }
-     
-     public static void estadoDeuda(){
-         
-     }
-     
         
 }

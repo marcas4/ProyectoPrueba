@@ -15,6 +15,7 @@ public class MisCuentas {
     private String banco;
     private int idBanco; 
     private double deuda;
+    private int idDeuda;
     private double saldo;
     private double cuota;
     private int numCuotas;
@@ -74,8 +75,7 @@ public class MisCuentas {
         this.idBanco = idBanco;
     }
 
-    
-    
+       
     public double getDeuda() {
         return deuda;
     }
@@ -84,6 +84,14 @@ public class MisCuentas {
         this.deuda = deuda;
     }
 
+    public int getIdDeuda() {
+        return idDeuda;
+    }
+
+    public void setIdDeuda(int idDeuda) {
+        this.idDeuda = idDeuda;
+    }
+    
     public double getSaldo() {
         return saldo;
     }
