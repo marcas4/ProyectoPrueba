@@ -49,16 +49,24 @@ public class MisCuentasDAO {
         
         try(Connection conexion = (Connection) dbConnect.get_connection()) {
                /* String query="SELECT * FROM deuda_por_usuario WHERE id_banco = ? AND id_usuario = ?";
+               */
+               String query="SELECT * FROM bancos INNER JOIN (deuda_por_usuario INNER JOIN deudas ON deuda_por_usuario.id_deuda = deudas.id_deuda)" +
+                             " ON bancos.id_banco = deuda_por_usuario.id_banco" +
+                             " WHERE deuda_por_usuario.id_banco = ? AND deuda_por_usuario.id_usuario = ?";
                 
                 ps=conexion.prepareStatement(query);
                 ps.setString(1, String.valueOf(misCuentas.getIdBanco()));
-                ps.setString(2, String.valueOf(misCuentas.getIdBanco()));
+                ps.setString(2, String.valueOf(misCuentas.getId_usuario()));
                 rs=ps.executeQuery();
-                
                 while (rs.next()) {
-                    System.out.println("Banco: "+misCuentas.getBanco()+"  deuda "+rs.getInt("deuda"));
-  
-                }*/
+                    System.out.println("id Banco: "+misCuentas.getIdBanco());
+                    System.out.println("Deuda: "+rs.getDouble("deuda"));
+                    System.out.println("Valor cuota: "+rs.getDouble("valor_cuota"));
+                    System.out.println("Cuotas totales: "+rs.getInt("cuotas_totales"));
+                    System.out.println("Cuotas pagadas: "+rs.getInt("cuotas_pagadas"));
+                    System.out.println("Saldo que debe: "+rs.getDouble("saldo"));
+                                
+                }
                
             }catch(SQLException e){
                 System.out.println("no se pudieron recuperar las deudas");

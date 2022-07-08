@@ -20,6 +20,10 @@ public class BasicApplication {
                         }*/
             
         Scanner sc = new Scanner(System.in);
+        Scanner scid = new Scanner(System.in);
+        System.out.println("Escribe el id de tu usuario");
+        int idUsuario = Integer.valueOf(scid.nextLine());
+        MisCuentas misCuentas = new MisCuentas(idUsuario);
             
             int option = 0;
             
@@ -37,11 +41,11 @@ public class BasicApplication {
                 
                 switch(option){
                     case 1:
-                        MisCuentasServices.listarBancos();
+                        MisCuentasServices.listarBancos(misCuentas);
                                      
                         break;
                     case 2:
-                        MisCuentasServices.listardeudas();
+                        MisCuentasServices.listardeudas(misCuentas);
                         break;
                     case 3:
                        MisCuentasServices.estadoDeuda();

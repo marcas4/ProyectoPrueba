@@ -12,17 +12,17 @@ import java.util.Scanner;
  */
 public class MisCuentasServices {
     
-     public static void listarBancos(){
-         
-         Scanner sc = new Scanner(System.in);
-        System.out.println("Escribe el id de tu usuario");
-        int idUsuario = Integer.valueOf(sc.nextLine());
-        MisCuentas cuenta = new MisCuentas(idUsuario);
-        MisCuentasDAO.leerBancosDB(cuenta);
+     public static void listarBancos(MisCuentas misCuentas){
+        MisCuentasDAO.leerBancosDB(misCuentas);
      }
      
-     public static void listardeudas(){
-         
+     public static void listardeudas(MisCuentas misCuentas){
+        Scanner sc = new Scanner(System.in);
+          
+        System.out.println("Escribe el id del banco que quieres mirar");
+        int idBanco = Integer.valueOf(sc.nextLine());
+        misCuentas.setIdBanco(idBanco);
+        MisCuentasDAO.verDeudasDB(misCuentas);
      }
      
      public static void pagarCuota(){
